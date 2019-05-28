@@ -1,5 +1,5 @@
 # Numeroll: A very simple number-building game made in Python
-## Version 1.0.0
+## Version 0.1
 
 ## Release notes
 This is the very first edition of Numeroll and consists of a single file, numeroll.py, which was created in Python 3.6. As such, the game is extremely _not_ test-proof and likely to break easily unless the play instructions below are followed.
