@@ -1,4 +1,4 @@
-from random import randint
+from random import randint,choice
 
 def CorrectAssignment(numstring, slot):
     if(slot > 0 and slot < 6):
@@ -39,8 +39,9 @@ while(turn < 5):
     valid_input = False
     rando = randint(1,9)
     print(f"\nRoll number {turn+1}: {rando}")
-    print(player_numstring)
-    #print('A B C D E')
+    print('Your number: ', player_numstring)
+    #display CPU number for testing purposes only
+    print('CPU number:  ', cpu_numstring)
     print('To which slot will you assign the number? (1-5) ')
     while valid_input == False:
         try:
@@ -53,7 +54,15 @@ while(turn < 5):
         except ValueError:
             print('Invalid entry, please try again.')
     #still no defined AI algorithm
-    cpu_numstring[-1-turn] = rando
+    slot_list = []
+    for i in cpu_numstring:
+      if cpu_numstring[i] == 0:
+        slot_list.append(i)
+        print("Adding", i, "to slot list")
+    rand_slot = choice(slot_list)
+    print("CPU's available slots: ", slot_list)
+    print("Assigning to slot", rand_slot)
+    cpu_numstring[rand_slot] = rando
     turn += 1
 
 player_finalnum = (10000*player_numstring[0] + 1000*player_numstring[1] +
