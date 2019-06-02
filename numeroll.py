@@ -3,7 +3,7 @@ from random import randint
 #still need to add ValueError exception in case user doesn't enter int?
 def CorrectAssignment(numstring, slot):
     if(slot > 0 and slot < 6):
-        if(numstring[slot] != 0):
+        if(numstring[slot-1]==0):
             return True
         else:
             return False
@@ -44,7 +44,7 @@ while(turn < 5):
     #print('A B C D E')
     print('To which slot will you assign the number? (1-5) ')
     while valid_input == False:
-        pick = input('> ')
+        pick = int(input('> '))
         if CorrectAssignment(player_numstring, pick):
             player_numstring[pick-1] = rando
             valid_input = True
