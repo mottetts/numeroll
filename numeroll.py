@@ -1,8 +1,20 @@
 from random import randint,choice
 
-def CorrectAssignment(numstring, slot):
+def CPUturn(number, rng):
+    slot_list = []
+    for i in range(0,5):
+        if number[i] == 0:
+            slot_list.append(i)
+            #print("Adding", i, "to slot list")
+    rand_slot = choice(slot_list)
+    #print("CPU's available slots: ", slot_list)
+    #print("Assigning to slot", rand_slot)
+    number[rand_slot] = rng
+    return number
+
+def CorrectAssignment(number, slot):
     if(slot > 0 and slot < 6):
-        if(numstring[slot-1]==0):
+        if(number[slot-1]==0):
             return True
         else:
             return False
@@ -10,23 +22,23 @@ def CorrectAssignment(numstring, slot):
         return False
 
 turn = 0
-player_numstring = [0,0,0,0,0]
-cpu_numstring = [0,0,0,0,0]
+player_number = [0,0,0,0,0]
+cpu_number = [0,0,0,0,0]
 
 #CPU algorithm here
 #use a function to return best strategic slot
 #sample rules:
 #   the closer the number is to 9, the farther left it should go
 #   the closer it is to 1, the farther right it should go
-#   based on the desired position, sort through the cpu_numstring from
+#   based on the desired position, sort through the cpu_number from
 #       left to right or from right to left
 #   additionally, cpu needs to take into account how many turns are
 #       remaining--this will affect the probability of the cpu's choosing
 #       a position all the way left or right
 #
 #the simplest rule would be:
-#if rando == 9 and cpu_numstring[0] == 0:
-#   cpu_numstring[0] = rando
+#if rando == 9 and cpu_number[0] == 0:
+#   cpu_number[0] = rando
 
 print("\n\nLet's Play Numeroll!")
 print("""
@@ -38,40 +50,32 @@ Can you beat the CPU and come up with the bigger number?
 while(turn < 5):
     valid_input = False
     rando = randint(1,9)
-    print(f"\nRoll number {turn+1}: {rando}")
-    print('Your number: ', player_numstring)
+    print(f"\nRound {turn+1}: {rando}")
+    print('Your number: ', player_number)
     #display CPU number for testing purposes only
-    print('CPU number:  ', cpu_numstring)
+    #print('CPU number:  ', cpu_number)
     print('To which slot will you assign the number? (1-5) ')
     while valid_input == False:
         try:
             pick = int(input('> '))
-            if CorrectAssignment(player_numstring, pick):
-                player_numstring[pick-1] = rando
+            if CorrectAssignment(player_number, pick):
+                player_number[pick-1] = rando
                 valid_input = True
             else:
                 print('Invalid entry, please try again.')
         except ValueError:
             print('Invalid entry, please try again.')
     #still no defined AI algorithm
-    slot_list = []
-    for i in cpu_numstring:
-      if cpu_numstring[i] == 0:
-        slot_list.append(i)
-        print("Adding", i, "to slot list")
-    rand_slot = choice(slot_list)
-    print("CPU's available slots: ", slot_list)
-    print("Assigning to slot", rand_slot)
-    cpu_numstring[rand_slot] = rando
+    CPUturn(cpu_number, rando)
     turn += 1
 
-player_finalnum = (10000*player_numstring[0] + 1000*player_numstring[1] +
-            100*player_numstring[2] + 10*player_numstring[3] +
-            player_numstring[4])
+player_finalnum = (10000*player_number[0] + 1000*player_number[1] +
+            100*player_number[2] + 10*player_number[3] +
+            player_number[4])
 
-cpu_finalnum = (10000*cpu_numstring[0] + 1000*cpu_numstring[1] +
-            100*cpu_numstring[2] + 10*cpu_numstring[3] +
-            cpu_numstring[4])
+cpu_finalnum = (10000*cpu_number[0] + 1000*cpu_number[1] +
+            100*cpu_number[2] + 10*cpu_number[3] +
+            cpu_number[4])
 
 print('\nYOUR FINAL NUMBER:', player_finalnum)
 print("COMPUTER'S FINAL NUMER:", cpu_finalnum)
