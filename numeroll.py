@@ -1,33 +1,20 @@
 from random import randint
 
-def CorrectAssignment(slot_num):
-    if(slot_num > 0 and slot_num < 6):
-        if(player_numstring[slot_num] != 0):
+#still need to add ValueError exception in case user doesn't enter int?
+def CorrectAssignment(numstring, slot):
+    if(slot > 0 and slot < 6):
+        if(numstring[slot] != 0):
             return True
         else:
             return False
     else:
         return False
 
-print("\n\nLet's Play Numeroll!")
-print("""
-In this game you are given five random digits, one at a time,
-and have to assign each of them to a slot in your five-digit number.
-Can you beat the CPU and come up with the bigger number?
-""")
-
 turn = 0
 player_numstring = [0,0,0,0,0]
 cpu_numstring = [0,0,0,0,0]
-#valid_input = False
-#while False:
-#   #keep looping until input returns value of True
 
-#don't allow for 00000 or 99999
-#allzero = False
-#allnine = False
-
-#CPU algorithm can go here
+#CPU algorithm here
 #use a function to return best strategic slot
 #sample rules:
 #   the closer the number is to 9, the farther left it should go
@@ -42,23 +29,28 @@ cpu_numstring = [0,0,0,0,0]
 #if rando == 9 and cpu_numstring[0] == 0:
 #   cpu_numstring[0] = rando
 
+print("\n\nLet's Play Numeroll!")
+print("""
+In this game you are given five random digits, one at a time,
+and have to assign each of them to a slot in your five-digit number.
+Can you beat the CPU and come up with the bigger number?
+""")
+
 while(turn < 5):
+    valid_input = False
     rando = randint(1,9)
     print(f"\nRoll number {turn+1}: {rando}")
     print(player_numstring)
     #print('A B C D E')
-    pick = int(input('To which slot will you assign the number? (1-5) '))
-#   while valid_input == False:
-#   if CorrectAssignment(pick):
-#       player_numstring[pick-1] = rando
-#   else:
-#   #   have them try again
-#    if pick>=1 and pick<=5 and player_numstring[pick-1]==0:
-#        player_numstring[pick-1] = rando
-#    else:
-#        print('Error: assigned to default slot')
-        player_numstring[-1] = rando
-
+    print('To which slot will you assign the number? (1-5) ')
+    while valid_input == False:
+        pick = input('> ')
+        if CorrectAssignment(player_numstring, pick):
+            player_numstring[pick-1] = rando
+            valid_input = True
+        else:
+            print('Invalid entry, please try again.')
+    #still no defined AI algorithm
     cpu_numstring[-1-turn] = rando
     turn += 1
 
