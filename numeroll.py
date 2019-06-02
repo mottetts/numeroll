@@ -1,6 +1,5 @@
 from random import randint
 
-#still need to add ValueError exception in case user doesn't enter int?
 def CorrectAssignment(numstring, slot):
     if(slot > 0 and slot < 6):
         if(numstring[slot-1]==0):
@@ -44,11 +43,14 @@ while(turn < 5):
     #print('A B C D E')
     print('To which slot will you assign the number? (1-5) ')
     while valid_input == False:
-        pick = int(input('> '))
-        if CorrectAssignment(player_numstring, pick):
-            player_numstring[pick-1] = rando
-            valid_input = True
-        else:
+        try:
+            pick = int(input('> '))
+            if CorrectAssignment(player_numstring, pick):
+                player_numstring[pick-1] = rando
+                valid_input = True
+            else:
+                print('Invalid entry, please try again.')
+        except ValueError:
             print('Invalid entry, please try again.')
     #still no defined AI algorithm
     cpu_numstring[-1-turn] = rando
