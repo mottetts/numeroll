@@ -1,12 +1,11 @@
 # Numeroll: A very simple number-building game made in Python
-## Version 0.2
-##2 June 2019
+## Version 0.2 - 2 June 2019
 
 Numeroll is an ongoing development project which represents my attempt to create a stand-alone (if elementary) game with Python.
 
-##In this release
--Players are now limited to entering digits corresponding to the available slots in the number; the game will continuously prompt for new input until a valid number is entered.
--The CPU will now randomly assign digits to slots instead of assigning them in reverse sequential order. (Still in vegetable mode, but at least a little less predictable :-)
+## In this release
+- Players are now limited to entering digits corresponding to the available slots in the number; the game will continuously prompt for new input until a valid number is entered.
+- The CPU will now randomly assign digits to slots instead of assigning them in reverse sequential order. (Still in vegetable mode, but at least a little less predictable :-)
 
 At present, Numeroll consists of a single file, numeroll.py, which was created in Python 3.6. As such, the game is in very early development and likely to break if the play instructions below are not followed.
 
