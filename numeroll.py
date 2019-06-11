@@ -54,10 +54,12 @@ while(turn < 5):
     valid_input = False
     rando = randint(0,9)
     print(f"\nRound {turn+1}: {rando}")
-    print('Your number: ', player_number)
+    print('Your number: ', end=' ')
+    for i in range(0,5):
+        print(player_number[i], end=' ')
     #display CPU number for testing purposes only
     #print('CPU number:  ', cpu_number)
-    print('To which slot will you assign the number? (1-5) ')
+    print('\n\nTo which slot will you assign the number? (1-5) ')
     while valid_input == False:
         try:
             pick = int(input('> '))
