@@ -1,19 +1,20 @@
 from random import randint,choice
 
-def CPUturn(number, rng):
+def CPUturn(number, slotcheck, rng):
     slot_list = []
     for i in range(0,5):
-        if number[i] == 0:
+        if slotcheck[i] == 0:
             slot_list.append(i)
             #print("Adding", i, "to slot list")
     rand_slot = choice(slot_list)
     #print("CPU's available slots: ", slot_list)
     #print("Assigning to slot", rand_slot)
     number[rand_slot] = rng
-    return number
+    slotcheck[rand_slot] = 1
+    return number, slotcheck
 
 def CorrectAssignment(number, slot):
-    if(slot > 0 and slot < 6):
+    if(0 < slot < 6):
         if(number[slot-1]==0):
             return True
         else:
@@ -23,7 +24,9 @@ def CorrectAssignment(number, slot):
 
 turn = 0
 player_number = [0,0,0,0,0]
+player_slotcheck = [0,0,0,0,0]
 cpu_number = [0,0,0,0,0]
+cpu_slotcheck = [0,0,0,0,0]
 
 #CPU algorithm here
 #use a function to return best strategic slot
@@ -49,7 +52,7 @@ Can you beat the CPU and come up with the bigger number?
 
 while(turn < 5):
     valid_input = False
-    rando = randint(1,9)
+    rando = randint(0,9)
     print(f"\nRound {turn+1}: {rando}")
     print('Your number: ', player_number)
     #display CPU number for testing purposes only
@@ -58,15 +61,16 @@ while(turn < 5):
     while valid_input == False:
         try:
             pick = int(input('> '))
-            if CorrectAssignment(player_number, pick):
+            if CorrectAssignment(player_slotcheck, pick):
                 player_number[pick-1] = rando
+                player_slotcheck[pick-1] = 1
                 valid_input = True
             else:
                 print('Invalid entry, please try again.')
         except ValueError:
             print('Invalid entry, please try again.')
     #still no defined AI algorithm
-    CPUturn(cpu_number, rando)
+    CPUturn(cpu_number, cpu_slotcheck, rando)
     turn += 1
 
 player_finalnum = (10000*player_number[0] + 1000*player_number[1] +
