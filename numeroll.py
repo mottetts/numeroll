@@ -23,7 +23,7 @@ def CorrectAssignment(number, slot):
         return False
 
 turn = 0
-player_number = [0,0,0,0,0]
+player_number = ['_','_','_','_','_']
 player_slotcheck = [0,0,0,0,0]
 cpu_number = [0,0,0,0,0]
 cpu_slotcheck = [0,0,0,0,0]
