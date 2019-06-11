@@ -70,7 +70,7 @@ while(turn < 5):
         except ValueError:
             print('Invalid entry, please try again.')
     #still no defined AI algorithm
-    CPUturn(cpu_number, cpu_slotcheck, rando)
+    cpu_number, cpu_slotcheck = CPUturn(cpu_number, cpu_slotcheck, rando)
     turn += 1
 
 player_finalnum = (10000*player_number[0] + 1000*player_number[1] +
